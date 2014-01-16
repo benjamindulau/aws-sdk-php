@@ -16,24 +16,18 @@ class AwsResourceIteratorFactory implements ResourceIteratorFactoryInterface
     /**
      * @var array Default configuration values for iterators
      */
-    protected static $defaultConfig = array(
-        'limit_key'   => null,
-        'limit_param' => null,
-        'more_key'    => null,
-        'token_key'   => null,
-        'token_param' => null,
-        'operations'  => array(),
+    protected static $defaultIteratorConfig = array(
+        AwsResourceIterator::INPUT_TOKEN  => null,
+        AwsResourceIterator::OUTPUT_TOKEN => null,
+        AwsResourceIterator::LIMIT_KEY    => null,
+        AwsResourceIterator::RESULT_KEY   => null,
+        AwsResourceIterator::MORE_RESULTS => null,
     );
 
     /**
-     * @var Collection The configuration for the iterators
+     * @var array Iterator configuration for each iterable operation
      */
     protected $config;
-
-    /**
-     * @var Collection Additional configurations for specific iterators
-     */
-    protected $operations;
 
     /**
      * @var ResourceIteratorFactoryInterface Another factory that will be used first to instantiate the iterator
@@ -43,59 +37,42 @@ class AwsResourceIteratorFactory implements ResourceIteratorFactoryInterface
     /**
      * @param array                            $config                 An array of configuration values for the factory
      * @param ResourceIteratorFactoryInterface $primaryIteratorFactory Another factory to use for chain of command
-     *
-     * @throws InvalidArgumentException
      */
     public function __construct(array $config, ResourceIteratorFactoryInterface $primaryIteratorFactory = null)
     {
         $this->primaryIteratorFactory = $primaryIteratorFactory;
-        // Set up the config with default values
-        $this->config = Collection::fromConfig($config, self::$defaultConfig);
-
-        // Pull out the operation-specific configurations
-        $this->operations = new Collection();
-        $potentialOperations = $this->config->get('operations') ?: array();
-        $this->config->remove('operations');
-        foreach ($potentialOperations as $key => $value) {
-            if (is_int($key) && is_string($value)) {
-                $this->operations->set($value, array());
-            } elseif (is_string($key) && is_array($value)) {
-                $this->operations->set($key, $value);
-            } else {
-                throw new InvalidArgumentException('The iterator factory configuration was invalid.');
-            }
+        $this->config = array();
+        foreach ($config as $name => $operation) {
+            $this->config[$name] = $operation + self::$defaultIteratorConfig;
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function build(CommandInterface $command, array $options = array())
     {
         // Get the configuration data for the command
         $commandName = $command->getName();
-        $iteratorConfig = $this->operations->get($commandName) ?: array();
-        $options = array_replace($this->config->getAll(), $iteratorConfig, $options);
+        $commandSupported = isset($this->config[$commandName]);
+        $options += $commandSupported ? $this->config[$commandName] : array();
 
-        // Instantiate the iterator using the primary factory (if there is one)
+        // Instantiate the iterator using the primary factory (if one was provided)
         if ($this->primaryIteratorFactory && $this->primaryIteratorFactory->canBuild($command)) {
             $iterator = $this->primaryIteratorFactory->build($command, $options);
-        } elseif (!$this->operations->hasKey($commandName)) {
+        } elseif (!$commandSupported) {
             throw new InvalidArgumentException("Iterator was not found for {$commandName}.");
         } else {
-            // Fallback to this factory for creating the iterator if the primary factory did not work
+            // Instantiate a generic AWS resource iterator
             $iterator = new AwsResourceIterator($command, $options);
         }
 
         return $iterator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function canBuild(CommandInterface $command)
     {
-        return ($this->primaryIteratorFactory && $this->primaryIteratorFactory->canBuild($command))
-            || $this->operations->hasKey($command->getName());
+        if ($this->primaryIteratorFactory) {
+            return $this->primaryIteratorFactory->canBuild($command);
+        } else {
+            return isset($this->config[$command->getName()]);
+        }
     }
 }

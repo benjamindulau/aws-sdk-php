@@ -4101,6 +4101,53 @@ return array (
             ),
         ),
     ),
+    'iterators' => array(
+        'ListBuckets' => array(
+            'result_key' => 'Buckets',
+        ),
+        'ListMultipartUploads' => array(
+            'limit_key' => 'MaxUploads',
+            'more_results' => 'IsTruncated',
+            'output_token' => array(
+                'NextKeyMarker',
+                'NextUploadIdMarker',
+            ),
+            'input_token' => array(
+                'KeyMarker',
+                'UploadIdMarker',
+            ),
+            'result_key' => 'Uploads',
+        ),
+        'ListObjectVersions' => array(
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxKeys',
+            'output_token' => array(
+                'NextKeyMarker',
+                'NextVersionIdMarker',
+            ),
+            'input_token' => array(
+                'KeyMarker',
+                'VersionIdMarker',
+            ),
+            'result_key' => 'Versions',
+        ),
+        'ListObjects' => array(
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxKeys',
+            'output_token' => 'NextMarker or Contents[-1].Key',
+            'input_token' => 'Marker',
+            'result_key' => array(
+                'Contents',
+                'CommonPrefixes',
+            ),
+        ),
+        'ListParts' => array(
+            'limit_key' => 'IsTruncated',
+            'output_token' => 'NextPartNumberMarker',
+            'input_token' => 'PartNumberMarker',
+            'result_key' => 'Parts',
+        ),
+    ),
     'waiters' => array(
         '__default__' => array(
             'interval' => 5,

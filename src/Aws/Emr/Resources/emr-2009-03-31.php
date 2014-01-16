@@ -2018,35 +2018,33 @@ return array (
         ),
     ),
     'iterators' => array(
-        'operations' => array(
-            'DescribeJobFlows' => array(
-                'result_key' => 'JobFlows',
-            ),
-            'ListBootstrapActions' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'result_key' => 'BootstrapActions',
-            ),
-            'ListClusters' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'result_key' => 'Clusters',
-            ),
-            'ListInstanceGroups' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'result_key' => 'InstanceGroups',
-            ),
-            'ListInstances' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'result_key' => 'Instances',
-            ),
-            'ListSteps' => array(
-                'token_param' => 'Marker',
-                'token_key' => 'Marker',
-                'result_key' => 'Steps',
-            ),
+        'DescribeJobFlows' => array(
+            'result_key' => 'JobFlows',
+        ),
+        'ListBootstrapActions' => array(
+            'token_param' => 'Marker',
+            'token_key' => 'Marker',
+            'result_key' => 'BootstrapActions',
+        ),
+        'ListClusters' => array(
+            'token_param' => 'Marker',
+            'token_key' => 'Marker',
+            'result_key' => 'Clusters',
+        ),
+        'ListInstanceGroups' => array(
+            'token_param' => 'Marker',
+            'token_key' => 'Marker',
+            'result_key' => 'InstanceGroups',
+        ),
+        'ListInstances' => array(
+            'token_param' => 'Marker',
+            'token_key' => 'Marker',
+            'result_key' => 'Instances',
+        ),
+        'ListSteps' => array(
+            'token_param' => 'Marker',
+            'token_key' => 'Marker',
+            'result_key' => 'Steps',
         ),
     ),
 );

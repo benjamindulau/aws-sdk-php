@@ -1371,4 +1371,18 @@ return array (
             ),
         ),
     ),
+    'iterators' => array(
+        'DescribeConnections' => array(
+            'result_key' => 'connections',
+        ),
+        'DescribeOfferings' => array(
+            'result_key' => 'offerings',
+        ),
+        'DescribeVirtualGateways' => array(
+            'result_key' => 'virtualGateways',
+        ),
+        'DescribeVirtualInterfaces' => array(
+            'result_key' => 'virtualInterfaces',
+        ),
+    ),
 );

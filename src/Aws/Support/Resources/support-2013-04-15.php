@@ -1020,34 +1020,32 @@ return array (
         ),
     ),
     'iterators' => array(
-        'operations' => array(
-            'DescribeCases' => array(
-                'token_param' => 'nextToken',
-                'token_key' => 'nextToken',
-                'limit_key' => 'maxResults',
-                'result_key' => 'cases',
-            ),
-            'DescribeCommunications' => array(
-                'token_param' => 'nextToken',
-                'token_key' => 'nextToken',
-                'limit_key' => 'maxResults',
-                'result_key' => 'communications',
-            ),
-            'DescribeServices' => array(
-                'result_key' => 'services',
-            ),
-            'DescribeTrustedAdvisorCheckRefreshStatuses' => array(
-                'result_key' => 'statuses',
-            ),
-            'DescribeTrustedAdvisorCheckSummaries' => array(
-                'result_key' => 'summaries',
-            ),
-            'DescribeSeverityLevels' => array(
-                'result_key' => 'severityLevelsList',
-            ),
-            'DescribeTrustedAdvisorChecks' => array(
-                'result_key' => 'checks',
-            ),
+        'DescribeCases' => array(
+            'input_token' => 'nextToken',
+            'output_token' => 'nextToken',
+            'limit_key' => 'maxResults',
+            'result_key' => 'cases',
+        ),
+        'DescribeCommunications' => array(
+            'input_token' => 'nextToken',
+            'output_token' => 'nextToken',
+            'limit_key' => 'maxResults',
+            'result_key' => 'communications',
+        ),
+        'DescribeServices' => array(
+            'result_key' => 'services',
+        ),
+        'DescribeTrustedAdvisorCheckRefreshStatuses' => array(
+            'result_key' => 'statuses',
+        ),
+        'DescribeTrustedAdvisorCheckSummaries' => array(
+            'result_key' => 'summaries',
+        ),
+        'DescribeSeverityLevels' => array(
+            'result_key' => 'severityLevelsList',
+        ),
+        'DescribeTrustedAdvisorChecks' => array(
+            'result_key' => 'checks',
         ),
     ),
 );

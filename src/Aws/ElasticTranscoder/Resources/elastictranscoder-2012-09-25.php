@@ -3849,27 +3849,25 @@ return array (
         ),
     ),
     'iterators' => array(
-        'operations' => array(
-            'ListJobsByPipeline' => array(
-                'token_param' => 'PageToken',
-                'token_key' => 'NextPageToken',
-                'result_key' => 'Jobs',
-            ),
-            'ListJobsByStatus' => array(
-                'token_param' => 'PageToken',
-                'token_key' => 'NextPageToken',
-                'result_key' => 'Jobs',
-            ),
-            'ListPipelines' => array(
-                'token_param' => 'PageToken',
-                'token_key' => 'NextPageToken',
-                'result_key' => 'Pipelines',
-            ),
-            'ListPresets' => array(
-                'token_param' => 'PageToken',
-                'token_key' => 'NextPageToken',
-                'result_key' => 'Presets',
-            ),
+        'ListJobsByPipeline' => array(
+            'input_token' => 'PageToken',
+            'output_token' => 'NextPageToken',
+            'result_key' => 'Jobs',
+        ),
+        'ListJobsByStatus' => array(
+            'input_token' => 'PageToken',
+            'output_token' => 'NextPageToken',
+            'result_key' => 'Jobs',
+        ),
+        'ListPipelines' => array(
+            'input_token' => 'PageToken',
+            'output_token' => 'NextPageToken',
+            'result_key' => 'Pipelines',
+        ),
+        'ListPresets' => array(
+            'input_token' => 'PageToken',
+            'output_token' => 'NextPageToken',
+            'result_key' => 'Presets',
         ),
     ),
 );

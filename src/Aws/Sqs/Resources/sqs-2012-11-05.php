@@ -1098,10 +1098,8 @@ return array (
         ),
     ),
     'iterators' => array(
-        'operations' => array(
-            'ListQueues' => array(
-                'result_key' => 'QueueUrls',
-            ),
+        'ListQueues' => array(
+            'result_key' => 'QueueUrls',
         ),
     ),
 );

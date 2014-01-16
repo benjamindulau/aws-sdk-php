@@ -178,24 +178,24 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method Model terminateInstances(array $args = array()) {@command Ec2 TerminateInstances}
  * @method Model unassignPrivateIpAddresses(array $args = array()) {@command Ec2 UnassignPrivateIpAddresses}
  * @method Model unmonitorInstances(array $args = array()) {@command Ec2 UnmonitorInstances}
- * @method waitUntilInstanceRunning(array $input) Wait using the InstanceRunning waiter. The input array uses the parameters of the DescribeInstances operation and waiter specific settings
- * @method waitUntilInstanceStopped(array $input) Wait using the InstanceStopped waiter. The input array uses the parameters of the DescribeInstances operation and waiter specific settings
- * @method waitUntilInstanceTerminated(array $input) Wait using the InstanceTerminated waiter. The input array uses the parameters of the DescribeInstances operation and waiter specific settings
- * @method waitUntilExportTaskCompleted(array $input) Wait using the ExportTaskCompleted waiter. The input array uses the parameters of the DescribeExportTasks operation and waiter specific settings
- * @method waitUntilExportTaskCancelled(array $input) Wait using the ExportTaskCancelled waiter. The input array uses the parameters of the DescribeExportTasks operation and waiter specific settings
- * @method waitUntilSnapshotCompleted(array $input) Wait using the SnapshotCompleted waiter. The input array uses the parameters of the DescribeSnapshots operation and waiter specific settings
- * @method waitUntilSubnetAvailable(array $input) Wait using the SubnetAvailable waiter. The input array uses the parameters of the DescribeSubnets operation and waiter specific settings
- * @method waitUntilVolumeAvailable(array $input) Wait using the VolumeAvailable waiter. The input array uses the parameters of the DescribeVolumes operation and waiter specific settings
- * @method waitUntilVolumeInUse(array $input) Wait using the VolumeInUse waiter. The input array uses the parameters of the DescribeVolumes operation and waiter specific settings
- * @method waitUntilVolumeDeleted(array $input) Wait using the VolumeDeleted waiter. The input array uses the parameters of the DescribeVolumes operation and waiter specific settings
- * @method waitUntilVpcAvailable(array $input) Wait using the VpcAvailable waiter. The input array uses the parameters of the DescribeVpcs operation and waiter specific settings
- * @method waitUntilVpnConnectionAvailable(array $input) Wait using the VpnConnectionAvailable waiter. The input array uses the parameters of the DescribeVpnConnections operation and waiter specific settings
- * @method waitUntilVpnConnectionDeleted(array $input) Wait using the VpnConnectionDeleted waiter. The input array uses the parameters of the DescribeVpnConnections operation and waiter specific settings
- * @method waitUntilBundleTaskComplete(array $input) Wait using the BundleTaskComplete waiter. The input array uses the parameters of the DescribeBundleTasks operation and waiter specific settings
- * @method waitUntilConversionTaskCompleted(array $input) Wait using the ConversionTaskCompleted waiter. The input array uses the parameters of the DescribeConversionTasks operation and waiter specific settings
- * @method waitUntilConversionTaskCancelled(array $input) Wait using the ConversionTaskCancelled waiter. The input array uses the parameters of the DescribeConversionTasks operation and waiter specific settings
- * @method waitUntilCustomerGatewayAvailable(array $input) Wait using the CustomerGatewayAvailable waiter. The input array uses the parameters of the DescribeCustomerGateways operation and waiter specific settings
- * @method waitUntilConversionTaskDeleted(array $input) Wait using the ConversionTaskDeleted waiter. The input array uses the parameters of the DescribeCustomerGateways operation and waiter specific settings
+ * @method waitUntilInstanceRunning(array $input) The input array uses the parameters of the DescribeInstances operation and waiter specific settings
+ * @method waitUntilInstanceStopped(array $input) The input array uses the parameters of the DescribeInstances operation and waiter specific settings
+ * @method waitUntilInstanceTerminated(array $input) The input array uses the parameters of the DescribeInstances operation and waiter specific settings
+ * @method waitUntilExportTaskCompleted(array $input) The input array uses the parameters of the DescribeExportTasks operation and waiter specific settings
+ * @method waitUntilExportTaskCancelled(array $input) The input array uses the parameters of the DescribeExportTasks operation and waiter specific settings
+ * @method waitUntilSnapshotCompleted(array $input) The input array uses the parameters of the DescribeSnapshots operation and waiter specific settings
+ * @method waitUntilSubnetAvailable(array $input) The input array uses the parameters of the DescribeSubnets operation and waiter specific settings
+ * @method waitUntilVolumeAvailable(array $input) The input array uses the parameters of the DescribeVolumes operation and waiter specific settings
+ * @method waitUntilVolumeInUse(array $input) The input array uses the parameters of the DescribeVolumes operation and waiter specific settings
+ * @method waitUntilVolumeDeleted(array $input) The input array uses the parameters of the DescribeVolumes operation and waiter specific settings
+ * @method waitUntilVpcAvailable(array $input) The input array uses the parameters of the DescribeVpcs operation and waiter specific settings
+ * @method waitUntilVpnConnectionAvailable(array $input) The input array uses the parameters of the DescribeVpnConnections operation and waiter specific settings
+ * @method waitUntilVpnConnectionDeleted(array $input) The input array uses the parameters of the DescribeVpnConnections operation and waiter specific settings
+ * @method waitUntilBundleTaskComplete(array $input) The input array uses the parameters of the DescribeBundleTasks operation and waiter specific settings
+ * @method waitUntilConversionTaskCompleted(array $input) The input array uses the parameters of the DescribeConversionTasks operation and waiter specific settings
+ * @method waitUntilConversionTaskCancelled(array $input) The input array uses the parameters of the DescribeConversionTasks operation and waiter specific settings
+ * @method waitUntilCustomerGatewayAvailable(array $input) The input array uses the parameters of the DescribeCustomerGateways operation and waiter specific settings
+ * @method waitUntilConversionTaskDeleted(array $input) The input array uses the parameters of the DescribeCustomerGateways operation and waiter specific settings
  * @method ResourceIteratorInterface getDescribeAccountAttributesIterator(array $args = array()) The input array uses the parameters of the DescribeAccountAttributes operation
  * @method ResourceIteratorInterface getDescribeAddressesIterator(array $args = array()) The input array uses the parameters of the DescribeAddresses operation
  * @method ResourceIteratorInterface getDescribeAvailabilityZonesIterator(array $args = array()) The input array uses the parameters of the DescribeAvailabilityZones operation
@@ -244,7 +244,7 @@ class Ec2Client extends AbstractClient
      * @param array|Collection $config Client configuration data
      *
      * @return self
-     * @see \Aws\Common\Client\DefaultClient for a list of available configuration options
+     * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/configuration.html#client-configuration-options
      */
     public static function factory($config = array())
     {

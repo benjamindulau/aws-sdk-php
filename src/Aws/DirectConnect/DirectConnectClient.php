@@ -64,7 +64,7 @@ class DirectConnectClient extends AbstractClient
      * @param array|Collection $config Client configuration data
      *
      * @return self
-     * @see \Aws\Common\Client\DefaultClient for a list of available configuration options
+     * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/configuration.html#client-configuration-options
      */
     public static function factory($config = array())
     {
@@ -75,22 +75,6 @@ class DirectConnectClient extends AbstractClient
                 Options::SERVICE_DESCRIPTION => __DIR__ . '/Resources/directconnect-%s.php'
             ))
             ->setExceptionParser(new JsonQueryExceptionParser())
-            ->setIteratorsConfig(array(
-                'operations'  => array(
-                    'DescribeConnections' => array(
-                        'result_key' => 'connections',
-                    ),
-                    'DescribeOfferings' => array(
-                        'result_key' => 'offerings',
-                    ),
-                    'DescribeVirtualGateways' => array(
-                        'result_key' => 'virtualGateways',
-                    ),
-                    'DescribeVirtualInterfaces' => array(
-                        'result_key' => 'virtualInterfaces',
-                    ),
-                )
-            ))
             ->build();
     }
 }

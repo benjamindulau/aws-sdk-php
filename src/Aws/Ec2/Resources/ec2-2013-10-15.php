@@ -15196,129 +15196,127 @@ return array (
         ),
     ),
     'iterators' => array(
-        'operations' => array(
-            'DescribeAccountAttributes' => array(
-                'result_key' => 'AccountAttributes',
-            ),
-            'DescribeAddresses' => array(
-                'result_key' => 'Addresses',
-            ),
-            'DescribeAvailabilityZones' => array(
-                'result_key' => 'AvailabilityZones',
-            ),
-            'DescribeBundleTasks' => array(
-                'result_key' => 'BundleTasks',
-            ),
-            'DescribeConversionTasks' => array(
-                'result_key' => 'ConversionTasks',
-            ),
-            'DescribeCustomerGateways' => array(
-                'result_key' => 'CustomerGateways',
-            ),
-            'DescribeDhcpOptions' => array(
-                'result_key' => 'DhcpOptions',
-            ),
-            'DescribeExportTasks' => array(
-                'result_key' => 'ExportTasks',
-            ),
-            'DescribeImages' => array(
-                'result_key' => 'Images',
-            ),
-            'DescribeInstanceStatus' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'limit_key' => 'MaxResults',
-                'result_key' => 'InstanceStatuses',
-            ),
-            'DescribeInstances' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'limit_key' => 'MaxResults',
-                'result_key' => 'Reservations',
-            ),
-            'DescribeInternetGateways' => array(
-                'result_key' => 'InternetGateways',
-            ),
-            'DescribeKeyPairs' => array(
-                'result_key' => 'KeyPairs',
-            ),
-            'DescribeLicenses' => array(
-                'result_key' => 'Licenses',
-            ),
-            'DescribeNetworkAcls' => array(
-                'result_key' => 'NetworkAcls',
-            ),
-            'DescribeNetworkInterfaces' => array(
-                'result_key' => 'NetworkInterfaces',
-            ),
-            'DescribePlacementGroups' => array(
-                'result_key' => 'PlacementGroups',
-            ),
-            'DescribeRegions' => array(
-                'result_key' => 'Regions',
-            ),
-            'DescribeReservedInstances' => array(
-                'result_key' => 'ReservedInstances',
-            ),
-            'DescribeReservedInstancesListings' => array(
-                'result_key' => 'ReservedInstancesListings',
-            ),
-            'DescribeReservedInstancesModifications' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'result_key' => 'ReservedInstancesModifications',
-            ),
-            'DescribeReservedInstancesOfferings' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'limit_key' => 'MaxResults',
-                'result_key' => 'ReservedInstancesOfferings',
-            ),
-            'DescribeRouteTables' => array(
-                'result_key' => 'RouteTables',
-            ),
-            'DescribeSecurityGroups' => array(
-                'result_key' => 'SecurityGroups',
-            ),
-            'DescribeSnapshots' => array(
-                'result_key' => 'Snapshots',
-            ),
-            'DescribeSpotInstanceRequests' => array(
-                'result_key' => 'SpotInstanceRequests',
-            ),
-            'DescribeSpotPriceHistory' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'limit_key' => 'MaxResults',
-                'result_key' => 'SpotPriceHistory',
-            ),
-            'DescribeSubnets' => array(
-                'result_key' => 'Subnets',
-            ),
-            'DescribeTags' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'limit_key' => 'MaxResults',
-                'result_key' => 'Tags',
-            ),
-            'DescribeVolumeStatus' => array(
-                'token_param' => 'NextToken',
-                'token_key' => 'NextToken',
-                'limit_key' => 'MaxResults',
-                'result_key' => 'VolumeStatuses',
-            ),
-            'DescribeVolumes' => array(
-                'result_key' => 'Volumes',
-            ),
-            'DescribeVpcs' => array(
-                'result_key' => 'Vpcs',
-            ),
-            'DescribeVpnConnections' => array(
-                'result_key' => 'VpnConnections',
-            ),
-            'DescribeVpnGateways' => array(
-                'result_key' => 'VpnGateways',
-            ),
+        'DescribeAccountAttributes' => array(
+            'result_key' => 'AccountAttributes',
+        ),
+        'DescribeAddresses' => array(
+            'result_key' => 'Addresses',
+        ),
+        'DescribeAvailabilityZones' => array(
+            'result_key' => 'AvailabilityZones',
+        ),
+        'DescribeBundleTasks' => array(
+            'result_key' => 'BundleTasks',
+        ),
+        'DescribeConversionTasks' => array(
+            'result_key' => 'ConversionTasks',
+        ),
+        'DescribeCustomerGateways' => array(
+            'result_key' => 'CustomerGateways',
+        ),
+        'DescribeDhcpOptions' => array(
+            'result_key' => 'DhcpOptions',
+        ),
+        'DescribeExportTasks' => array(
+            'result_key' => 'ExportTasks',
+        ),
+        'DescribeImages' => array(
+            'result_key' => 'Images',
+        ),
+        'DescribeInstanceStatus' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'limit_key' => 'MaxResults',
+            'result_key' => 'InstanceStatuses',
+        ),
+        'DescribeInstances' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'limit_key' => 'MaxResults',
+            'result_key' => 'Reservations',
+        ),
+        'DescribeInternetGateways' => array(
+            'result_key' => 'InternetGateways',
+        ),
+        'DescribeKeyPairs' => array(
+            'result_key' => 'KeyPairs',
+        ),
+        'DescribeLicenses' => array(
+            'result_key' => 'Licenses',
+        ),
+        'DescribeNetworkAcls' => array(
+            'result_key' => 'NetworkAcls',
+        ),
+        'DescribeNetworkInterfaces' => array(
+            'result_key' => 'NetworkInterfaces',
+        ),
+        'DescribePlacementGroups' => array(
+            'result_key' => 'PlacementGroups',
+        ),
+        'DescribeRegions' => array(
+            'result_key' => 'Regions',
+        ),
+        'DescribeReservedInstances' => array(
+            'result_key' => 'ReservedInstances',
+        ),
+        'DescribeReservedInstancesListings' => array(
+            'result_key' => 'ReservedInstancesListings',
+        ),
+        'DescribeReservedInstancesModifications' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'result_key' => 'ReservedInstancesModifications',
+        ),
+        'DescribeReservedInstancesOfferings' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'limit_key' => 'MaxResults',
+            'result_key' => 'ReservedInstancesOfferings',
+        ),
+        'DescribeRouteTables' => array(
+            'result_key' => 'RouteTables',
+        ),
+        'DescribeSecurityGroups' => array(
+            'result_key' => 'SecurityGroups',
+        ),
+        'DescribeSnapshots' => array(
+            'result_key' => 'Snapshots',
+        ),
+        'DescribeSpotInstanceRequests' => array(
+            'result_key' => 'SpotInstanceRequests',
+        ),
+        'DescribeSpotPriceHistory' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'limit_key' => 'MaxResults',
+            'result_key' => 'SpotPriceHistory',
+        ),
+        'DescribeSubnets' => array(
+            'result_key' => 'Subnets',
+        ),
+        'DescribeTags' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'limit_key' => 'MaxResults',
+            'result_key' => 'Tags',
+        ),
+        'DescribeVolumeStatus' => array(
+            'input_token' => 'NextToken',
+            'output_token' => 'NextToken',
+            'limit_key' => 'MaxResults',
+            'result_key' => 'VolumeStatuses',
+        ),
+        'DescribeVolumes' => array(
+            'result_key' => 'Volumes',
+        ),
+        'DescribeVpcs' => array(
+            'result_key' => 'Vpcs',
+        ),
+        'DescribeVpnConnections' => array(
+            'result_key' => 'VpnConnections',
+        ),
+        'DescribeVpnGateways' => array(
+            'result_key' => 'VpnGateways',
         ),
     ),
     'waiters' => array(

@@ -78,8 +78,8 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method Model restoreDBInstanceFromDBSnapshot(array $args = array()) {@command Rds RestoreDBInstanceFromDBSnapshot}
  * @method Model restoreDBInstanceToPointInTime(array $args = array()) {@command Rds RestoreDBInstanceToPointInTime}
  * @method Model revokeDBSecurityGroupIngress(array $args = array()) {@command Rds RevokeDBSecurityGroupIngress}
- * @method waitUntilDBInstanceAvailable(array $input) Wait using the DBInstanceAvailable waiter. The input array uses the parameters of the DescribeDBInstances operation and waiter specific settings
- * @method waitUntilDBInstanceDeleted(array $input) Wait using the DBInstanceDeleted waiter. The input array uses the parameters of the DescribeDBInstances operation and waiter specific settings
+ * @method waitUntilDBInstanceAvailable(array $input) The input array uses the parameters of the DescribeDBInstances operation and waiter specific settings
+ * @method waitUntilDBInstanceDeleted(array $input) The input array uses the parameters of the DescribeDBInstances operation and waiter specific settings
  * @method ResourceIteratorInterface getDescribeDBEngineVersionsIterator(array $args = array()) The input array uses the parameters of the DescribeDBEngineVersions operation
  * @method ResourceIteratorInterface getDescribeDBInstancesIterator(array $args = array()) The input array uses the parameters of the DescribeDBInstances operation
  * @method ResourceIteratorInterface getDescribeDBLogFilesIterator(array $args = array()) The input array uses the parameters of the DescribeDBLogFiles operation
@@ -112,7 +112,7 @@ class RdsClient extends AbstractClient
      * @param array|Collection $config Client configuration data
      *
      * @return self
-     * @see \Aws\Common\Client\DefaultClient for a list of available configuration options
+     * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/configuration.html#client-configuration-options
      */
     public static function factory($config = array())
     {

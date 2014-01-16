@@ -1418,4 +1418,27 @@ return array (
             ),
         ),
     ),
+    'iterators' => array(
+        'DescribeObjects' => array(
+            'input_token' => 'marker',
+            'output_token' => 'marker',
+            'more_results' => 'hasMoreResults',
+            'limit_key' => 'limit',
+            'result_key' => 'pipelineObjects',
+        ),
+        'ListPipelines' => array(
+            'input_token' => 'marker',
+            'output_token' => 'marker',
+            'more_results' => 'hasMoreResults',
+            'limit_key' => 'limit',
+            'result_key' => 'pipelineIdList',
+        ),
+        'QueryObjects' => array(
+            'input_token' => 'marker',
+            'output_token' => 'marker',
+            'more_results' => 'hasMoreResults',
+            'limit_key' => 'limit',
+            'result_key' => 'ids',
+        ),
+    ),
 );

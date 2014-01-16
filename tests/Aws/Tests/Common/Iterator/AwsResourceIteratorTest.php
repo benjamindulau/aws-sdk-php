@@ -45,14 +45,14 @@ class AwsResourceIteratorTest extends \Guzzle\Tests\GuzzleTestCase
     /**
     * @dataProvider getDataForPageSizeTest
     */
-    public function testPrepareRequestSetsPageSizeCorrectly($limitParam, $limit, $pageSize, $resultingLimit)
+    public function testPrepareRequestSetsPageSizeCorrectly($limitKey, $limit, $pageSize, $resultingLimit)
     {
         $command = $this->getMockedCommand();
         if ($limit) {
-            $command->set($limitParam, $limit);
+            $command->set($limitKey, $limit);
         }
 
-        $iterator = new AwsResourceIterator($command, array('limit_param' => $limitParam));
+        $iterator = new AwsResourceIterator($command, array(AwsResourceIterator::LIMIT_KEY => $limitKey));
         if ($pageSize) {
             $iterator->setPageSize($pageSize);
         }
@@ -65,7 +65,7 @@ class AwsResourceIteratorTest extends \Guzzle\Tests\GuzzleTestCase
         $prepareRequest->setAccessible(true);
         $prepareRequest->invoke($iterator);
 
-        $this->assertEquals($resultingLimit, $command->get($limitParam));
+        $this->assertEquals($resultingLimit, $command->get($limitKey));
     }
 
     public function getDataForApplyNextTokenTest()
@@ -83,10 +83,10 @@ class AwsResourceIteratorTest extends \Guzzle\Tests\GuzzleTestCase
     /**
      * @dataProvider getDataForApplyNextTokenTest
      */
-    public function testApplyNextTokenSetsTokenCorrectly($tokenParam, $nextToken, $resultingToken, $expectException)
+    public function testApplyNextTokenSetsTokenCorrectly($inputToken, $nextToken, $resultingToken, $expectException)
     {
         $command = $this->getMockedCommand();
-        $iterator = new AwsResourceIterator($command, array('token_param' => $tokenParam));
+        $iterator = new AwsResourceIterator($command, array(AwsResourceIterator::INPUT_TOKEN => $inputToken));
 
         $property = new \ReflectionProperty($iterator, 'command');
         $property->setAccessible(true);
@@ -103,13 +103,13 @@ class AwsResourceIteratorTest extends \Guzzle\Tests\GuzzleTestCase
             $applyNextToken->invoke($iterator);
 
             // Get results
-            if (is_array($tokenParam)) {
+            if (is_array($inputToken)) {
                 $result = array();
-                foreach ($tokenParam as $token) {
+                foreach ($inputToken as $token) {
                     $result[] = $command->get($token);
                 }
             } else {
-                $result = $command->get($tokenParam);
+                $result = $command->get($inputToken);
             }
         } catch (\RuntimeException $e) {
             if ($expectException) {
@@ -175,16 +175,16 @@ class AwsResourceIteratorTest extends \Guzzle\Tests\GuzzleTestCase
      * @dataProvider getDataForDetermineNextTokenTest
      */
     public function testCanDetermineNextTokenCorrectly(
-        $moreKey,
-        $tokenKey,
+        $moreResults,
+        $outputToken,
         $nextToken,
         array $data
     ) {
         $model = new Model($data);
         $command = $this->getMockedCommand();
         $iterator = new AwsResourceIterator($command, array(
-            'more_key'  => $moreKey,
-            'token_key' => $tokenKey,
+            AwsResourceIterator::MORE_RESULTS => $moreResults,
+            AwsResourceIterator::OUTPUT_TOKEN => $outputToken,
         ));
 
         $method = new \ReflectionMethod($iterator, 'determineNextToken');
@@ -204,8 +204,8 @@ class AwsResourceIteratorTest extends \Guzzle\Tests\GuzzleTestCase
             ->will($this->onConsecutiveCalls($model1, $model2));
 
         $iterator = new AwsResourceIterator($command, array(
-            'token_key'  => 'NextToken',
-            'result_key' => 'Results'
+            AwsResourceIterator::OUTPUT_TOKEN => 'NextToken',
+            AwsResourceIterator::RESULT_KEY   => 'Results'
         ));
 
         // Setup state
@@ -228,6 +228,24 @@ class AwsResourceIteratorTest extends \Guzzle\Tests\GuzzleTestCase
 
         $this->assertEquals(array(), $result);
         $this->assertSame($model2, $iterator->getLastResult());
+    }
+
+    public function testAppliesMapDecorator()
+    {
+        $command = $this->getMockedCommand();
+        $iterator = new AwsResourceIterator($command);
+        $iterator = $iterator->map(function($item) {return $item;});
+
+        $this->assertInstanceOf('Guzzle\\Iterator\\MapIterator', $iterator);
+    }
+
+    public function testAppliesFilterDecorator()
+    {
+        $command = $this->getMockedCommand();
+        $iterator = new AwsResourceIterator($command);
+        $iterator = $iterator->filter(function($item) {return $item;});
+
+        $this->assertInstanceOf('Guzzle\\Iterator\\FilterIterator', $iterator);
     }
 
     /**

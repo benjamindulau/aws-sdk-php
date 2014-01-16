@@ -30,20 +30,27 @@ class AwsResourceIteratorFactoryTest extends \Guzzle\Tests\GuzzleTestCase
     {
         return array(
             array(
-                array('operations' => array('foo')),
-                array('foo' => array())
+                array('foo' => array()),
+                array('foo' => array(
+                    AwsResourceIterator::INPUT_TOKEN  => null,
+                    AwsResourceIterator::OUTPUT_TOKEN => null,
+                    AwsResourceIterator::LIMIT_KEY    => null,
+                    AwsResourceIterator::RESULT_KEY   => null,
+                    AwsResourceIterator::MORE_RESULTS => null,
+                ))
             ),
             array(
-                array('operations' => array('foo' => array('bar'))),
-                array('foo' => array('bar'))
-            ),
-            array(
-                array('operations' => array(1)),
-                '[EXCEPTION]'
-            ),
-            array(
-                array('operations' => array('foo' => 'bar')),
-                '[EXCEPTION]'
+                array('foo' => array(
+                    AwsResourceIterator::INPUT_TOKEN  => 'a',
+                    AwsResourceIterator::OUTPUT_TOKEN => 'b',
+                )),
+                array('foo' => array(
+                    AwsResourceIterator::INPUT_TOKEN  => 'a',
+                    AwsResourceIterator::OUTPUT_TOKEN => 'b',
+                    AwsResourceIterator::LIMIT_KEY    => null,
+                    AwsResourceIterator::RESULT_KEY   => null,
+                    AwsResourceIterator::MORE_RESULTS => null,
+                )),
             ),
         );
     }
@@ -53,13 +60,8 @@ class AwsResourceIteratorFactoryTest extends \Guzzle\Tests\GuzzleTestCase
      */
     public function testOperationsAreDiscoveredInConstructor(array $config, $expectedResult)
     {
-        try {
-            $factory = new AwsResourceIteratorFactory($config);
-            $actualResult = $this->readAttribute($factory, 'operations')->getAll();
-        } catch (\InvalidArgumentException $e) {
-            $actualResult = self::EXCEPTION;
-        }
-
+        $factory = new AwsResourceIteratorFactory($config);
+        $actualResult = $this->readAttribute($factory, 'config');
         $this->assertEquals($expectedResult, $actualResult);
     }
 
@@ -87,7 +89,7 @@ class AwsResourceIteratorFactoryTest extends \Guzzle\Tests\GuzzleTestCase
             ->will($this->returnValue(true));
 
         return array(
-            array($command, array('FooBar'), null, true),
+            array($command, array('FooBar' => array()), null, true),
             array($command, array(), null, false),
             array($command, array(), $primaryFactory, true),
         );
@@ -101,7 +103,7 @@ class AwsResourceIteratorFactoryTest extends \Guzzle\Tests\GuzzleTestCase
         $success = false;
 
         try {
-            $factory = new AwsResourceIteratorFactory(array('operations' => $operations), $otherFactory);
+            $factory = new AwsResourceIteratorFactory($operations, $otherFactory);
             $iterator = $factory->build($command);
             $success = $iterator instanceof AwsResourceIterator;
         } catch (\InvalidArgumentException $e) {

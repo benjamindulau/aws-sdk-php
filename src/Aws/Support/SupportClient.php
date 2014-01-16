@@ -39,13 +39,7 @@ use Guzzle\Service\Resource\ResourceIteratorInterface;
  * @method Model describeTrustedAdvisorChecks(array $args = array()) {@command Support DescribeTrustedAdvisorChecks}
  * @method Model refreshTrustedAdvisorCheck(array $args = array()) {@command Support RefreshTrustedAdvisorCheck}
  * @method Model resolveCase(array $args = array()) {@command Support ResolveCase}
- * @method ResourceIteratorInterface getDescribeCasesIterator(array $args = array()) The input array uses the parameters of the DescribeCases operation
- * @method ResourceIteratorInterface getDescribeCommunicationsIterator(array $args = array()) The input array uses the parameters of the DescribeCommunications operation
- * @method ResourceIteratorInterface getDescribeServicesIterator(array $args = array()) The input array uses the parameters of the DescribeServices operation
- * @method ResourceIteratorInterface getDescribeTrustedAdvisorCheckRefreshStatusesIterator(array $args = array()) The input array uses the parameters of the DescribeTrustedAdvisorCheckRefreshStatuses operation
  * @method ResourceIteratorInterface getDescribeTrustedAdvisorCheckSummariesIterator(array $args = array()) The input array uses the parameters of the DescribeTrustedAdvisorCheckSummaries operation
- * @method ResourceIteratorInterface getDescribeSeverityLevelsIterator(array $args = array()) The input array uses the parameters of the DescribeSeverityLevels operation
- * @method ResourceIteratorInterface getDescribeTrustedAdvisorChecksIterator(array $args = array()) The input array uses the parameters of the DescribeTrustedAdvisorChecks operation
  *
  * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/service-support.html User guide
  * @link http://docs.aws.amazon.com/aws-sdk-php/latest/class-Aws.Support.SupportClient.html API docs
@@ -60,7 +54,7 @@ class SupportClient extends AbstractClient
      * @param array|Collection $config Client configuration data
      *
      * @return self
-     * @see \Aws\Common\Client\DefaultClient for a list of available configuration options
+     * @link http://docs.aws.amazon.com/aws-sdk-php/guide/latest/configuration.html#client-configuration-options
      */
     public static function factory($config = array())
     {
