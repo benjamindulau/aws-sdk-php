@@ -30,9 +30,6 @@ use Guzzle\Service\Resource\Model;
  */
 class ListObjectsIterator extends AwsResourceIterator
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function handleResults(Model $result)
     {
         // Get the list of objects and record the last key

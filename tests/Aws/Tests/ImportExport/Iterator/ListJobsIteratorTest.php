@@ -16,6 +16,7 @@
 
 namespace Aws\Tests\ImportExport\Iterator;
 
+use Aws\Common\Iterator\AwsResourceIterator;
 use Aws\ImportExport\Iterator\ListJobsIterator;
 use Guzzle\Service\Resource\Model;
 
@@ -41,8 +42,8 @@ class ListJobsIteratorTest extends \Guzzle\Tests\GuzzleTestCase
     {
         $command = $this->getMock('Guzzle\Service\Command\CommandInterface');
         $iterator = new ListJobsIterator($command, array(
-            'result_key' => 'Jobs',
-            'more_key'   => 'IsTruncated',
+            AwsResourceIterator::RESULT_KEY   => 'Jobs',
+            AwsResourceIterator::MORE_RESULTS => 'IsTruncated',
         ));
         $model = new Model(array(
             'Jobs' => array(

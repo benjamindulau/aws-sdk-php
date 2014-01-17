@@ -4134,7 +4134,7 @@ return array (
         'ListObjects' => array(
             'more_results' => 'IsTruncated',
             'limit_key' => 'MaxKeys',
-            'output_token' => 'NextMarker or Contents[-1].Key',
+            'output_token' => 'NextMarker',
             'input_token' => 'Marker',
             'result_key' => array(
                 'Contents',
