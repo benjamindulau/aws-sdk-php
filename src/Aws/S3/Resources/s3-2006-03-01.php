@@ -4142,7 +4142,8 @@ return array (
             ),
         ),
         'ListParts' => array(
-            'limit_key' => 'IsTruncated',
+            'more_results' => 'IsTruncated',
+            'limit_key' => 'MaxParts',
             'output_token' => 'NextPartNumberMarker',
             'input_token' => 'PartNumberMarker',
             'result_key' => 'Parts',

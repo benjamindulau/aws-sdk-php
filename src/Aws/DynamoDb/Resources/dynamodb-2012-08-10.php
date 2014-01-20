@@ -3943,16 +3943,19 @@ return array (
             'result_key' => 'Responses/*',
         ),
         'ListTables' => array(
+            'limit_key' => 'Limit',
             'input_token' => 'ExclusiveStartTableName',
             'output_token' => 'LastEvaluatedTableName',
             'result_key' => 'TableNames',
         ),
         'Query' => array(
+            'limit_key' => 'Limit',
             'input_token' => 'ExclusiveStartKey',
             'output_token' => 'LastEvaluatedKey',
             'result_key' => 'Items',
         ),
         'Scan' => array(
+            'limit_key' => 'Limit',
             'input_token' => 'ExclusiveStartKey',
             'output_token' => 'LastEvaluatedKey',
             'result_key' => 'Items',
