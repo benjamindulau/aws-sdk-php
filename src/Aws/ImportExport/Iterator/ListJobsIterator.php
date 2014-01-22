@@ -31,8 +31,8 @@ class ListJobsIterator extends AwsResourceIterator
     {
         $this->nextToken = null;
 
-        if ($result->get($this->get(AwsResourceIterator::MORE_RESULTS))) {
-            $jobs = $result->get($this->get(AwsResourceIterator::RESULT_KEY)) ?: array();
+        if ($result->get($this->get('more_results'))) {
+            $jobs = $result->get($this->get('result_key')) ?: array();
             $numJobs = count($jobs);
             $this->nextToken = $numJobs ? $jobs[$numJobs - 1]['JobId'] : null;
         }

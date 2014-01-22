@@ -53,7 +53,7 @@ class ClientBuilderTest extends \Guzzle\Tests\GuzzleTestCase
             ))
             ->setConfigRequirements(array('scheme'))
             ->setExceptionParser(new JsonQueryExceptionParser())
-            ->setIteratorsConfig(array(AwsResourceIterator::INPUT_TOKEN => 'foo'))
+            ->setIteratorsConfig(array('input_token' => 'foo'))
             ->build();
 
         $this->assertInstanceOf('Aws\DynamoDb\DynamoDbClient', $client);

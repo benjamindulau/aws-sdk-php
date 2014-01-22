@@ -42,8 +42,8 @@ class ListJobsIteratorTest extends \Guzzle\Tests\GuzzleTestCase
     {
         $command = $this->getMock('Guzzle\Service\Command\CommandInterface');
         $iterator = new ListJobsIterator($command, array(
-            AwsResourceIterator::RESULT_KEY   => 'Jobs',
-            AwsResourceIterator::MORE_RESULTS => 'IsTruncated',
+            'result_key'   => 'Jobs',
+            'more_results' => 'IsTruncated',
         ));
         $model = new Model(array(
             'Jobs' => array(

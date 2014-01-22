@@ -32,24 +32,24 @@ class AwsResourceIteratorFactoryTest extends \Guzzle\Tests\GuzzleTestCase
             array(
                 array('foo' => array()),
                 array('foo' => array(
-                    AwsResourceIterator::INPUT_TOKEN  => null,
-                    AwsResourceIterator::OUTPUT_TOKEN => null,
-                    AwsResourceIterator::LIMIT_KEY    => null,
-                    AwsResourceIterator::RESULT_KEY   => null,
-                    AwsResourceIterator::MORE_RESULTS => null,
+                    'input_token'  => null,
+                    'output_token' => null,
+                    'limit_key'    => null,
+                    'result_key'   => null,
+                    'more_results' => null,
                 ))
             ),
             array(
                 array('foo' => array(
-                    AwsResourceIterator::INPUT_TOKEN  => 'a',
-                    AwsResourceIterator::OUTPUT_TOKEN => 'b',
+                    'input_token'  => 'a',
+                    'output_token' => 'b',
                 )),
                 array('foo' => array(
-                    AwsResourceIterator::INPUT_TOKEN  => 'a',
-                    AwsResourceIterator::OUTPUT_TOKEN => 'b',
-                    AwsResourceIterator::LIMIT_KEY    => null,
-                    AwsResourceIterator::RESULT_KEY   => null,
-                    AwsResourceIterator::MORE_RESULTS => null,
+                    'input_token'  => 'a',
+                    'output_token' => 'b',
+                    'limit_key'    => null,
+                    'result_key'   => null,
+                    'more_results' => null,
                 )),
             ),
         );
@@ -113,5 +113,37 @@ class AwsResourceIteratorFactoryTest extends \Guzzle\Tests\GuzzleTestCase
         }
 
         $this->assertTrue($success);
+    }
+
+    public function testLegacyOptionsAreHandled()
+    {
+        $command = $this->getMockBuilder('Guzzle\Service\Command\CommandInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $command->expects($this->any())
+            ->method('getName')
+            ->will($this->returnValue('FooBar'));
+
+        $providedOptions = array(
+            'token_param' => 'a',
+            'token_key'   => 'b',
+            'limit_param' => 'c',
+            'result_key'  => 'd',
+            'more_key'    => 'e',
+        );
+
+        $expectedOptions = array(
+            'input_token'  => 'a',
+            'output_token' => 'b',
+            'limit_key'    => 'c',
+            'result_key'   => 'd',
+            'more_results' => 'e',
+        );
+
+        $factory = new AwsResourceIteratorFactory(array('FooBar' => array()));
+        $iterator = $factory->build($command, $providedOptions);
+        $actualOptions = $this->readAttribute($iterator, 'data');
+
+        $this->assertEquals($expectedOptions, $actualOptions);
     }
 }

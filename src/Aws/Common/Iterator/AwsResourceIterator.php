@@ -28,36 +28,10 @@ use Guzzle\Service\Resource\ResourceIterator;
  */
 class AwsResourceIterator extends ResourceIterator
 {
-    const INPUT_TOKEN  = 'input_token';  // Formerly "token_param"
-    const OUTPUT_TOKEN = 'output_token'; // Formerly "token_key"
-    const LIMIT_KEY    = 'limit_key';    // Formerly "limit_param" in some places
-    const RESULT_KEY   = 'result_key';
-    const MORE_RESULTS = 'more_results'; // Formerly "more_key"
-
     /**
      * @var Model Result of a command
      */
     protected $lastResult = null;
-
-    /**
-     * @param callable $callback The callback to apply as a map function
-     *
-     * @return MapIterator
-     */
-    public function map($callback)
-    {
-        return new MapIterator($this, $callback);
-    }
-
-    /**
-     * @param callable $callback The callback to apply as a filter function
-     *
-     * @return FilterIterator
-     */
-    public function filter($callback)
-    {
-        return new FilterIterator($this, $callback);
-    }
 
     /**
      * Provides access to the most recent result obtained by the iterator.
@@ -105,7 +79,7 @@ class AwsResourceIterator extends ResourceIterator
     protected function prepareRequest()
     {
         // Get the limit parameter key to set
-        $limitKey = $this->get(self::LIMIT_KEY);
+        $limitKey = $this->get('limit_key');
         if ($limitKey && ($limit = $this->command->get($limitKey))) {
             $pageSize = $this->calculatePageSize();
 
@@ -125,20 +99,17 @@ class AwsResourceIterator extends ResourceIterator
         $results = array();
 
         // Get the result key that contains the results
-        if ($resultKey = $this->get(self::RESULT_KEY)) {
+        if ($resultKey = $this->get('result_key')) {
             $results = $result->getPath($resultKey) ?: array();
         }
 
         return $results;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function applyNextToken()
     {
         // Get the token parameter key to set
-        if ($tokenParam = $this->get(self::INPUT_TOKEN)) {
+        if ($tokenParam = $this->get('input_token')) {
             // Set the next token. Works with multi-value tokens
             if (is_array($tokenParam)) {
                 if (is_array($this->nextToken) && count($tokenParam) === count($this->nextToken)) {
@@ -162,11 +133,11 @@ class AwsResourceIterator extends ResourceIterator
     {
         $this->nextToken = null;
 
-        // If the value of "more key" is true or there is no "more key" to check, then try to get the next token
-        $moreKey = $this->get(self::MORE_RESULTS);
+        // If the value of "more_results" is true or there is no "more_results" to check, then try to get the next token
+        $moreKey = $this->get('more_results');
         if ($moreKey === null || $result->getPath($moreKey)) {
             // Get the token key to check
-            if ($tokenKey = $this->get(self::OUTPUT_TOKEN)) {
+            if ($tokenKey = $this->get('output_token')) {
                 // Get the next token's value. Works with multi-value tokens
                 $getToken = function ($key) use ($result) {
                     return $result->getPath((string) $key);

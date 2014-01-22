@@ -36,8 +36,8 @@ class ListObjectsIterator extends AwsResourceIterator
         $objects = $result->get('Contents') ?: array();
         $numObjects = count($objects);
         $lastKey = $numObjects ? $objects[$numObjects - 1]['Key'] : false;
-        if ($lastKey && !$result->hasKey($this->get(self::OUTPUT_TOKEN))) {
-            $result->set($this->get(self::OUTPUT_TOKEN), $lastKey);
+        if ($lastKey && !$result->hasKey($this->get('output_token'))) {
+            $result->set($this->get('output_token'), $lastKey);
         }
 
         // Closure for getting the name of an object or prefix

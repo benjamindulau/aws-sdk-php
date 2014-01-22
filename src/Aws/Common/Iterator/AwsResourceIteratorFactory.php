@@ -17,11 +17,21 @@ class AwsResourceIteratorFactory implements ResourceIteratorFactoryInterface
      * @var array Default configuration values for iterators
      */
     protected static $defaultIteratorConfig = array(
-        AwsResourceIterator::INPUT_TOKEN  => null,
-        AwsResourceIterator::OUTPUT_TOKEN => null,
-        AwsResourceIterator::LIMIT_KEY    => null,
-        AwsResourceIterator::RESULT_KEY   => null,
-        AwsResourceIterator::MORE_RESULTS => null,
+        'input_token'  => null,
+        'output_token' => null,
+        'limit_key'    => null,
+        'result_key'   => null,
+        'more_results' => null,
+    );
+
+    /**
+     * @var array Legacy configuration options mapped to their new names
+     */
+    private static $legacyConfigOptions = array(
+        'token_param' => 'input_token',
+        'token_key'   => 'output_token',
+        'limit_param' => 'limit_key',
+        'more_key'    => 'more_results',
     );
 
     /**
@@ -52,6 +62,7 @@ class AwsResourceIteratorFactory implements ResourceIteratorFactoryInterface
         // Get the configuration data for the command
         $commandName = $command->getName();
         $commandSupported = isset($this->config[$commandName]);
+        $options = $this->translateLegacyConfigOptions($options);
         $options += $commandSupported ? $this->config[$commandName] : array();
 
         // Instantiate the iterator using the primary factory (if one was provided)
@@ -74,5 +85,22 @@ class AwsResourceIteratorFactory implements ResourceIteratorFactoryInterface
         } else {
             return isset($this->config[$command->getName()]);
         }
+    }
+
+    /**
+     * @param array $config The config for a single operation
+     *
+     * @return array The modified config with legacy options translated
+     */
+    private function translateLegacyConfigOptions($config)
+    {
+        foreach (self::$legacyConfigOptions as $legacyOption => $newOption) {
+            if (isset($config[$legacyOption])) {
+                $config[$newOption] = $config[$legacyOption];
+                unset($config[$legacyOption]);
+            }
+        }
+
+        return $config;
     }
 }
